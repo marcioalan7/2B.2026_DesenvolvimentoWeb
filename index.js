@@ -8,6 +8,13 @@ app.get(
     }
 );
 
+app.get(
+    '/sobre',
+    (req, res) => {
+        res.send('Somos uma equipe de Desenvolvimento Web')
+    }
+);
+
 app.listen(
     3000,
     () => {
