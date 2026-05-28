@@ -45,6 +45,14 @@ app.get(
     }
 );
 
+app.get(
+    '/produtos/:nome',
+        (req, res) => {
+            const nomeProd = req.params.nome;
+         res.send(`Produto enviado: ${nomeProd}`)
+    }
+);
+
 app.listen(
     3000,
     () => {
