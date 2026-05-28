@@ -23,6 +23,13 @@ app.get(
     }
 );
 
+app.get(
+    '/erro',
+        (req, res) => {
+        res.status(404).send('Não Econtrado')
+    }
+);
+
 app.listen(
     3000,
     () => {
