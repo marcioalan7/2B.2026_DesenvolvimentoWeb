@@ -30,6 +30,55 @@ app.get(
     }
 );
 
+app.get(
+    '/erro',
+        (req, res) => {
+        res.status(404).send('Não Econtrado')
+    }
+);
+
+app.get(
+    '/erro',
+        (req, res) => {
+        res.status(404).send('Não Econtrado')
+    }
+);
+
+app.get(
+    '/erro',
+        (req, res) => {
+        res.status(404).send('Não Econtrado')
+    }
+);
+
+app.get(
+    '/erro',
+        (req, res) => {
+        res.status(404).send('Não Econtrado')
+    }
+);
+
+app.get(
+    '/erro',
+        (req, res) => {
+        res.status(404).send('Não Econtrado')
+    }
+);
+
+app.get(
+    '/erro',
+        (req, res) => {
+        res.status(404).send('Não Econtrado')
+    }
+);
+
+app.get(
+    '/inicio',
+        (req, res) => {
+        res.redirect('/')
+    }
+);
+
 app.listen(
     3000,
     () => {
