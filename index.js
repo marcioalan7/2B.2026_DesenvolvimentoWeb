@@ -46,7 +46,7 @@ app.get(
 );
 
 app.get(
-    '/produtos/:nome',
+    '/produto/:nome',
         (req, res) => {
             const nomeProd = req.params.nome;
          res.send(`Produto enviado: ${nomeProd}`)
@@ -67,6 +67,15 @@ app.get(
         (req, res) => {
             const {nome} = req.query
          res.send(`Buscando por: ${nome}`)
+    }
+);
+
+app.get(
+    '/produtos',
+        (req, res) => {
+            const {categoria} = req.query
+            const {pagina} = req.query
+         res.send(`Buscando por: ${categoria} - ${pagina}`)
     }
 );
 
