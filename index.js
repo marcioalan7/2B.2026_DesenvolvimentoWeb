@@ -53,6 +53,15 @@ app.get(
     }
 );
 
+app.get(
+    '/filme/:id/:nome',
+        (req, res) => {
+            const idFilme = req.params.id;
+            const nomeFilme = req.params.nome
+         res.send(`Id do Filme: ${idFilme} - Nome do Filme: ${nomeFilme}`)
+    }
+);
+
 app.listen(
     3000,
     () => {
