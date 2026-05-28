@@ -62,6 +62,14 @@ app.get(
     }
 );
 
+app.get(
+    '/buscar',
+        (req, res) => {
+            const {nome} = req.query
+         res.send(`Buscando por: ${nome}`)
+    }
+);
+
 app.listen(
     3000,
     () => {
