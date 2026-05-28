@@ -79,6 +79,14 @@ app.get(
     }
 );
 
+app.get(
+    '/usuario',
+        (req, res) => {
+            const {idade} = req.query
+         res.send(`Filtrando usuários com idade: ${idade}`)
+    }
+);
+
 app.listen(
     3000,
     () => {
