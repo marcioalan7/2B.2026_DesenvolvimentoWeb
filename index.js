@@ -37,7 +37,13 @@ app.get(
     }
 );
 
-
+app.get(
+    '/usuarios/:id',
+        (req, res) => {
+            const id = req.params.id;
+         res.send(`Usúarios ${id}`)
+    }
+);
 
 app.listen(
     3000,
