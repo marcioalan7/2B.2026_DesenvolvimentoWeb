@@ -69,6 +69,27 @@ app.get("/perfil", (req, res) => {
   });
 });
 
+const filmes = [
+  {
+    nome: "Matrix",
+    ano: 1999,
+  },
+  {
+    nome: "Interestelar",
+    ano: 2014,
+  },
+  {
+    nome: "Avatar",
+    ano: 2009,
+  },
+];
+
+app.get("/filmes", (req, res) => {
+  res.render("filmes", {
+    filmes,
+  });
+});
+
 app.listen(3000, () => {
   console.log("Servidor em execução!");
 });
