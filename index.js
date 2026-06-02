@@ -3,6 +3,9 @@ const exphbs = require("express-handlebars");
 
 const app = express();
 
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
 app.engine("handlebars", exphbs.engine({ defaultLayout: false }));
 app.set("view engine", "handlebars");
 
@@ -15,11 +18,14 @@ app.get("/sobre", (req, res) => {
 });
 
 app.get("/contato", (req, res) => {
-  res.json({ email: "contato@email.com", telefone: "(81) 99999-9999" });
+  res.json({
+    email: "contato@email.com",
+    telefone: "(81) 99999-9999",
+  });
 });
 
 app.get("/erro", (req, res) => {
-  res.status(404).send("Não Econtrado");
+  res.status(404).send("Página não encontrada");
 });
 
 app.get("/inicio", (req, res) => {
@@ -28,33 +34,39 @@ app.get("/inicio", (req, res) => {
 
 app.get("/usuarios/:id", (req, res) => {
   const id = req.params.id;
-  res.send(`Usúarios ${id}`);
+
+  res.send(`Usuário ${id}`);
 });
 
-app.get("/produto/:nome", (req, res) => {
+app.get("/produtos/:nome", (req, res) => {
   const nomeProd = req.params.nome;
+
   res.send(`Produto enviado: ${nomeProd}`);
 });
 
-app.get("/filme/:id/:nome", (req, res) => {
+app.get("/filmes/:id/:nome", (req, res) => {
   const idFilme = req.params.id;
   const nomeFilme = req.params.nome;
+
   res.send(`Id do Filme: ${idFilme} - Nome do Filme: ${nomeFilme}`);
 });
 
 app.get("/buscar", (req, res) => {
   const { nome } = req.query;
+
   res.send(`Buscando por: ${nome}`);
 });
 
 app.get("/produtos", (req, res) => {
   const { categoria } = req.query;
   const { pagina } = req.query;
+
   res.send(`Buscando por: ${categoria} - ${pagina}`);
 });
 
 app.get("/usuario", (req, res) => {
   const { idade } = req.query;
+
   res.send(`Filtrando usuários com idade: ${idade}`);
 });
 
@@ -87,6 +99,8 @@ const filmes = [
 app.get("/filmes", (req, res) => {
   res.render("filmes", {
     filmes,
+    logado: true,
+    admin: false,
   });
 });
 
