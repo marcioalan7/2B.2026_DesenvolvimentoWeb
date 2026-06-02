@@ -1,95 +1,67 @@
-const express = require('express');
+const express = require("express");
+const exphbs = require("express-handlebars");
+
 const app = express();
 
-app.get(
-    '/',
-    (req, res) => {
-        res.send('Bem vindo ao sistema!')
-    }
-);
+app.engine("handlebars", exphbs.engine({ defaultLayout: false }));
+app.set("view engine", "handlebars");
 
-app.get(
-    '/sobre',
-    (req, res) => {
-        res.send('Somos uma equipe de Desenvolvimento Web')
-    }
-);
+app.get("/", (req, res) => {
+  res.send("Bem vindo ao sistema!");
+});
 
-app.get(
-    '/contato',
-        (req, res) => {
-        res.json({"email": "contato@email.com",
-                "telefone": "(81) 99999-9999"})
-    }
-);
+app.get("/sobre", (req, res) => {
+  res.send("Somos uma equipe de Desenvolvimento Web");
+});
 
-app.get(
-    '/erro',
-        (req, res) => {
-        res.status(404).send('Não Econtrado')
-    }
-);
+app.get("/contato", (req, res) => {
+  res.json({ email: "contato@email.com", telefone: "(81) 99999-9999" });
+});
 
-app.get(
-    '/inicio',
-        (req, res) => {
-        res.redirect('/')
-    }
-);
+app.get("/erro", (req, res) => {
+  res.status(404).send("Não Econtrado");
+});
 
-app.get(
-    '/usuarios/:id',
-        (req, res) => {
-            const id = req.params.id;
-         res.send(`Usúarios ${id}`)
-    }
-);
+app.get("/inicio", (req, res) => {
+  res.redirect("/");
+});
 
-app.get(
-    '/produto/:nome',
-        (req, res) => {
-            const nomeProd = req.params.nome;
-         res.send(`Produto enviado: ${nomeProd}`)
-    }
-);
+app.get("/usuarios/:id", (req, res) => {
+  const id = req.params.id;
+  res.send(`Usúarios ${id}`);
+});
 
-app.get(
-    '/filme/:id/:nome',
-        (req, res) => {
-            const idFilme = req.params.id;
-            const nomeFilme = req.params.nome
-         res.send(`Id do Filme: ${idFilme} - Nome do Filme: ${nomeFilme}`)
-    }
-);
+app.get("/produto/:nome", (req, res) => {
+  const nomeProd = req.params.nome;
+  res.send(`Produto enviado: ${nomeProd}`);
+});
 
-app.get(
-    '/buscar',
-        (req, res) => {
-            const {nome} = req.query
-         res.send(`Buscando por: ${nome}`)
-    }
-);
+app.get("/filme/:id/:nome", (req, res) => {
+  const idFilme = req.params.id;
+  const nomeFilme = req.params.nome;
+  res.send(`Id do Filme: ${idFilme} - Nome do Filme: ${nomeFilme}`);
+});
 
-app.get(
-    '/produtos',
-        (req, res) => {
-            const {categoria} = req.query
-            const {pagina} = req.query
-         res.send(`Buscando por: ${categoria} - ${pagina}`)
-    }
-);
+app.get("/buscar", (req, res) => {
+  const { nome } = req.query;
+  res.send(`Buscando por: ${nome}`);
+});
 
-app.get(
-    '/usuario',
-        (req, res) => {
-            const {idade} = req.query
-         res.send(`Filtrando usuários com idade: ${idade}`)
-    }
-);
+app.get("/produtos", (req, res) => {
+  const { categoria } = req.query;
+  const { pagina } = req.query;
+  res.send(`Buscando por: ${categoria} - ${pagina}`);
+});
 
-app.listen(
-    3000,
-    () => {
-        console.log('Servidor em execução!')
-    }
-);
+app.get("/usuario", (req, res) => {
+  const { idade } = req.query;
+  res.send(`Filtrando usuários com idade: ${idade}`);
+});
+
+app.get("/home", (req, res) => {
+  res.render("home");
+});
+
+app.listen(3000, () => {
+  console.log("Servidor em execução!");
+});
