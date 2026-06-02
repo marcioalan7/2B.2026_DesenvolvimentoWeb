@@ -62,6 +62,13 @@ app.get("/home", (req, res) => {
   res.render("home");
 });
 
+app.get("/perfil", (req, res) => {
+  res.render("perfil", {
+    nome: "Adryan",
+    idade: 17,
+  });
+});
+
 app.listen(3000, () => {
   console.log("Servidor em execução!");
 });
