@@ -9,10 +9,6 @@ app.use(express.json());
 app.engine("handlebars", exphbs.engine({ defaultLayout: false }));
 app.set("view engine", "handlebars");
 
-app.get("/", (req, res) => {
-  res.send("Bem vindo ao sistema!");
-});
-
 app.get("/sobre", (req, res) => {
   res.send("Somos uma equipe de Desenvolvimento Web");
 });
@@ -58,10 +54,9 @@ app.get("/buscar", (req, res) => {
 });
 
 app.get("/produtos", (req, res) => {
-  const { categoria } = req.query;
-  const { pagina } = req.query;
+  const { categoria, pagina } = req.query;
 
-  res.send(`Buscando por: ${categoria} - ${pagina}`);
+  res.send(`Buscando por: ${categoria} - Página ${pagina}`);
 });
 
 app.get("/usuario", (req, res) => {
@@ -102,6 +97,60 @@ app.get("/filmes", (req, res) => {
     logado: true,
     admin: false,
   });
+});
+
+const videos = [
+  {
+    titulo: "Video 1",
+    criador: "Marcio",
+    descricao: "Curso de Express.js",
+    visualizacoes: 1000,
+    curtidas: 500,
+    hashtag: "#nodejs",
+    urlVideo: "https://youtube.com",
+    thumbnail:
+      "https://img.magnific.com/fotos-gratis/composicao-abstrata-de-luz-ultravioleta-uv_23-2149243965.jpg?semt=ais_hybrid&w=740&q=80",
+  },
+];
+
+app.get("/", (req, res) => {
+  res.render("inicio");
+});
+
+app.get("/videos", (req, res) => {
+  res.render("videos", { videos });
+});
+
+app.get("/videos/cadastrar", (req, res) => {
+  res.render("cadastrar");
+});
+
+app.post("/videos", (req, res) => {
+  const {
+    titulo,
+    criador,
+    descricao,
+    visualizacoes,
+    curtidas,
+    hashtag,
+    urlVideo,
+    thumbnail,
+  } = req.body;
+
+  const novoVideo = {
+    titulo,
+    criador,
+    descricao,
+    visualizacoes: parseInt(visualizacoes),
+    curtidas: parseInt(curtidas),
+    hashtag,
+    urlVideo,
+    thumbnail,
+  };
+
+  videos.push(novoVideo);
+
+  res.redirect("/videos");
 });
 
 app.listen(3000, () => {
